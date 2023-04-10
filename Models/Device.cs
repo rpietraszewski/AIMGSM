@@ -6,6 +6,6 @@ namespace AIMGSM.Models
     {
         public Guid Id { get; set; }
         public BrandEnum Brand { get; set; }
-        public string Model { get; set; }
+        public string? Model { get; set; }
     }
 }
