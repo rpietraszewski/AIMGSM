@@ -1,5 +1,9 @@
 using AIMGSM.Contexts;
+using AIMGSM.Services;
+using AIMGSM.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +13,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDbContext<ServiceContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.AddTransient<IContactService, ContactService>();
+
 // Add services to the container.
+builder.Configuration.SetBasePath(Directory.GetCurrentDirectory());
+builder.Configuration.AddJsonFile("appsettings.json");
+
+builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

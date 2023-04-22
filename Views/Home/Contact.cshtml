@@ -1,51 +1,70 @@
-﻿@{
-    ViewData["Title"] = "Contact";
-}
-<div class="container py-4">
-
-    <!-- Bootstrap 5 starter form -->
-    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-
-        <!-- Name input -->
-        <div class="mb-3">
-            <label class="form-label" for="name">Name</label>
-            <input class="form-control" id="name" type="text" placeholder="Name" data-sb-validations="required" />
-            <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+﻿@using AIMGSM.ViewModels;
+@model ContactVM
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-heading">Kontakt & FAQ</div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#faq">Dowiedz się więcej</a>
+    </div>
+</header>
+<section class="page-section" id="faq">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">FAQ</h2>
+            <h3 class="section-subheading text-muted">Najczęściej zadawane przez was pytania</h3>
         </div>
-
-        <!-- Email address input -->
-        <div class="mb-3">
-            <label class="form-label" for="emailAddress">Email Address</label>
-            <input class="form-control" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required, email" />
-            <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-            <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+        <div class="row text-center">
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="portfolio-caption-heading">FAQ 1</div>
+                <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="portfolio-caption-heading">FAQ 1</div>
+                <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="portfolio-caption-heading">FAQ 1</div>
+                <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="portfolio-caption-heading">FAQ 1</div>
+                <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="portfolio-caption-heading">FAQ 1</div>
+                <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="portfolio-caption-heading">FAQ 1</div>
+                <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
+            </div>
         </div>
-
-        <!-- Message input -->
-        <div class="mb-3">
-            <label class="form-label" for="message">Message</label>
-            <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;" data-sb-validations="required"></textarea>
-            <div class="invalid-feedback" data-sb-feedback="message:required">Message is required.</div>
+    </div>
+</section>
+<section class="page-section bg-light">
+    <div class="container py-5">
+        <div class="text-center">
+        <h2 class="section-heading text-uppercase">Skontaktuj się z nami</h2>
         </div>
+<form method="post" action="@Url.Action("Contact","Home")">
+    <div class="form-group">
+                <label class="section-subheading text-muted">Temat w jakim się pan/pani kontaktuje</label>
+        <input type="text" id="Name" name="Name" class="form-control" value="@Model.Name" />
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
 
-        <!-- Form submissions success message -->
-        <div class="d-none" id="submitSuccessMessage">
-            <div class="text-center mb-3">Form submission successful!</div>
-        </div>
+    <div class="form-group">
+        <label class="section-subheading text-muted">Email do kontaktu</label>
+        <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" />
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
 
-        <!-- Form submissions error message -->
-        <div class="d-none" id="submitErrorMessage">
-            <div class="text-center text-danger mb-3">Error sending message!</div>
-        </div>
+    <div class="form-group">
+                <label class="section-subheading text-muted">Opis tematu/problemu</label>
+        <textarea id="Message" name="Message" class="form-control">@Model.Message</textarea>
+        @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+    </div>
 
-        <!-- Form submit button -->
-        <div class="d-grid">
-            <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
-        </div>
-
-    </form>
-
-</div>
-
-<!-- SB Forms JS -->
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    </div>
+</section>

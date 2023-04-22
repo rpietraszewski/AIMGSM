@@ -20,13 +20,13 @@ namespace AIMGSM.Services
             list.ForEach(element =>
             {
                 DeviceVM device = new DeviceVM();
+                PriceVM price = new PriceVM();
                 ServiceVM serviceVM = new ServiceVM()
                 {
-                    Description= element.Description,
                     Model = device.Model,
                     Brand = device.Brand,
-                    PriceFake=element.PriceFake,
-                    PriceOriginal=element.PriceOriginal,
+                    SecondPrice = price.SecondPrice,
+                    PriceOriginal=price.OriginalPrice,
                     Name= element.Name,
                 };
                 obj.Add(serviceVM);

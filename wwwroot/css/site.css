@@ -3475,6 +3475,10 @@ textarea.form-control-lg {
   display: block;
 }
 
+.dropdown-menu:hover .dropdown-item {
+    display: block;
+}
+
 .dropdown-header {
   display: block;
   padding: var(--bs-dropdown-header-padding-y) var(--bs-dropdown-header-padding-x);

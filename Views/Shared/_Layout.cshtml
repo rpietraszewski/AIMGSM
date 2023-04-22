@@ -18,10 +18,23 @@
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
+                <div class="collapse navbar-collapse">
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#about">Usługi</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#news">Nowości</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle show" href="/Home/Services" toggle="">Usługi</a>
+                            <div class="dropdown-menu" id="about">
+                            <a class="dropdown-item">sdasdsa</a>
+                            <a class="dropdown-item">sdasdsa</a>
+                            <a class="dropdown-item">sdasdsa</a>
+                            <a class="dropdown-item">sdasdsa</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/Home/Blog">Nowości</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Home/Contact">Kontakt</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Home/Privacy">O nas</a></li>
                     </ul>
