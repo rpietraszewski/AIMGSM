@@ -4,7 +4,9 @@ namespace AIMGSM.ViewModels
 {
     public class DeviceVM
     {
-        public BrandEnum Brand { get; set; }
-        public string Model { get; set; }
+        public int Id { get; set; }
+        public BrandEnum? Brand { get; set; }
+        public string? Model { get; set; }
+        public TypeEnum? Type { get; set; }
     }
 }

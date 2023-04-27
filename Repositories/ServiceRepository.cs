@@ -5,10 +5,15 @@ namespace AIMGSM.Repositories
 {
     public class ServiceRepository
     {
-        private readonly ServiceContext _context;
-        public ServiceRepository(ServiceContext context)
+        private readonly GlobalContext _context;
+        public ServiceRepository(GlobalContext context)
         {
             _context = context;
+        }
+        public void AddService(Service service)
+        {
+            _context.Service.Add(service);
+            _context.SaveChanges();
         }
         public IQueryable<Service> GetAllServices()
         {

@@ -34,7 +34,7 @@ namespace AIMGSM.Services
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Credentials = new NetworkCredential(_configuration.GetValue<string>("Contact:SmtpUsername"), _configuration.GetValue<string>("Contact:SmtpPassword"));
             smtpClient.EnableSsl = true;
-
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.Send(mailMessage);
         }
     }

@@ -11340,3 +11340,33 @@ section#contact form#contactForm :-ms-input-placeholder {
     background-color: black;
     color: #FFF;
 }
+
+/* The container <div> - needed to position the dropdown content */
+.mydropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.mydropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #212529;
+    min-width: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    color: white;
+}
+
+    /* Links inside the dropdown */
+    .mydropdown-content a {
+        padding: 12px 16px;
+        text-decoration: underline;
+        display: block;
+    }
+
+/* Show the dropdown menu on hover */
+.mydropdown:hover .mydropdown-content {
+    display: block;
+}
+
