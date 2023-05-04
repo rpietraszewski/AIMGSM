@@ -2,13 +2,12 @@
 
 namespace AIMGSM.ViewModels
 {
-    public class PriceVM
+    public class PriceAddVM
     {
         public int Id { get; set; }
         public int OriginalPrice { get; set; }
         public int SecondPrice { get; set; }
-        public string? Name { get; set; }
-        public BrandEnum? Brand { get; set; }
-        public string? Model { get; set; }
+        public int DeviceId { get; set; }
+        public int ServiceId { get; set; }
     }
 }

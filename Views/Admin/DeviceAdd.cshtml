@@ -1,0 +1,50 @@
+﻿@using AIMGSM.ViewModels;
+@using AIMGSM.Data;
+@model DeviceVM
+<header class="page-section bg-black">
+    <div class="container text-center">
+        <h2 class="masthead-subheading text-uppercase text-light">Dodanie Urządzenia</h2>
+    </div>
+</header>
+<section class="page-section bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading">Urządzenie :</h2>
+        </div>
+<form asp-action="DeviceAdd" method="post">
+    <div class="form-group">
+        <label asp-for="Brand" class="control-label"></label>
+        <select asp-for="Brand" class="form-control">
+            <option value="">-- Select a brand --</option>
+            @foreach (var brand in Enum.GetValues(typeof(BrandEnum)))
+            {
+                <option value="@brand">@brand</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Model" class="control-label"></label>
+        <input asp-for="Model" class="form-control" />
+    </div>
+    <div class="form-group pt-3">
+        <label asp-for="Type" class="control-label"></label>
+        <select asp-for="Type" class="form-control">
+            <option value="">-- Select a type --</option>
+            @foreach (var type in Enum.GetValues(typeof(TypeEnum)))
+            {
+                <option value="@type">@type</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+
+    </div>
+</section>
+<section class="page-section bg-dark">
+    <div class="mt-minus p-3">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.635598684986!2d21.003806315796734!3d52.23183797976071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc8c92692e49%3A0xc2e97ae5311f2dc2!2sPa%C5%82ac%20Kultury%20i%20Nauki!5e0!3m2!1spl!2spl!4v1680883548358!5m2!1spl!2spl" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>

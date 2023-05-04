@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using AIMGSM.Models;
 using AIMGSM.Repositories;
+using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AIMGSM.Controllers
 {
@@ -13,58 +15,127 @@ namespace AIMGSM.Controllers
         private readonly IContactService _contactService;
         private readonly IServiceService _serviceService;
         private readonly IDeviceService _deviceService;
-        public AdminController(ILogger<AdminController> logger, IContactService contactService, IServiceService serviceService, IDeviceService deviceService)
+        private readonly IPriceService _priceService;
+        public AdminController(ILogger<AdminController> logger, IContactService contactService, IServiceService serviceService, IDeviceService deviceService, IPriceService priceService)
         {
             _logger = logger;
             _contactService = contactService;
             _serviceService = serviceService;
             _deviceService = deviceService;
+            _priceService = priceService;
         }
+        [HttpGet]
         public IActionResult Services()
         {
-            ViewBag.services = _serviceService.GetAllServices();
-            return View();
-        }
-        public ActionResult ServiceAdd()
-        {
-            Service service = new Service();
-
-            _serviceService.AddService(service);
-            return RedirectToAction("Services");
-        }
-        public ActionResult Devices()
-        {
-            List<DeviceVM> list = _deviceService.GetAllDevices();
-
+            List<ServiceVM> list = _serviceService.GetAllServices();
             return View(list);
         }
-        public ActionResult DeviceAdd(DeviceVM deviceVM)
+        [HttpGet]
+        public IActionResult ServiceAdd()
+        {
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            return View("Services");
+        }
+        [HttpPost]
+        public IActionResult ServiceAdd(ServiceVM serviceVM)
+        {
+            if (ModelState.IsValid)
+            {
+                _serviceService.AddService(serviceVM);
+                return RedirectToAction("Services");
+            }
+            return View(serviceVM);
+        }
+        [HttpPost]
+        public IActionResult ServiceDelete(int id)
+        {
+            if (id != null)
+            {
+                _serviceService.RemoveService(id);
+                return RedirectToAction("Services");
+            }
+            return RedirectToAction("Services");
+        }
+        [HttpGet]
+        public IActionResult Devices()
+        {
+            List<DeviceVM> list = _deviceService.GetAllDevices();
+            return View(list);
+        }
+        [HttpGet]
+        public IActionResult DeviceAdd()
+        {
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            return View("Devices");
+        }
+        [HttpPost]
+        public IActionResult DeviceAdd(DeviceVM deviceVM)
         {
             if (ModelState.IsValid)
             {
                 _deviceService.AddDevice(deviceVM);
-                return RedirectToAction("Services");
+                return RedirectToAction("Devices");
             }
             return View(deviceVM);
         }
-        public ActionResult DeviceDelete(int? id)
+        [HttpPost]
+        public IActionResult DeviceDelete(int id)
         {
-            if (id == null)
+            if (id != null)
             {
-                return View();
+                _deviceService.RemoveDevice(id);
+                return RedirectToAction("Devices");
             }
-            else
-            {
-                if (id != null)
-                {
-                    _deviceService.RemoveDevice((int)id);
-                }
-            }
-            return View();
+            return RedirectToAction("Devices");
         }
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Prices()
+        {
+            List<PriceVM> list = _priceService.GetAllPrices();
+            return View(list);
+        }
+        [HttpGet]
+        public IActionResult PriceAdd()
+        {
+            var devices = _deviceService.GetAllDevices();
+            ViewBag.Devices = devices;
+            var services = _serviceService.GetAllServices();
+            ViewBag.Services = services;
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            return View("Prices");
+        }
+        [HttpPost]
+        public IActionResult PriceAdd(PriceVM priceVM, int deviceId, int serviceId)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                _priceService.AddPrice(priceVM,deviceId,serviceId);
+            }
+            return RedirectToAction("Prices");
+        }
+        [HttpPost]
+        public IActionResult PriceDelete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                _priceService.RemovePrice(id);
+            }
+            return RedirectToAction("Prices");
         }
     }
 }
