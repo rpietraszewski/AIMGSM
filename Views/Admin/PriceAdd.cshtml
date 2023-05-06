@@ -1,0 +1,49 @@
+﻿@using AIMGSM.ViewModels;
+@using AIMGSM.Data;
+@model PriceAddVM
+<header class="page-section bg-black">
+    <div class="container text-center">
+        <h2 class="masthead-subheading text-uppercase text-light">Dodanie Serwisu</h2>
+    </div>
+</header>
+<section class="page-section bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading">Serwis :</h2>
+        </div>
+        <form asp-action="ServiceAdd" method="post">
+            <div class="form-group">
+                <label asp-for="OriginalPrice" class="control-label"></label>
+                <input asp-for="OriginalPrice" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondPrice" class="control-label"></label>
+                <input asp-for="SecondPrice" class="form-control" />
+            </div>
+            <div class="form-group pt-3">
+                <label asp-for="DeviceId" class="control-label"></label>
+                <select asp-for="DeviceId" class="form-control">
+                    <option value="">-- Wybierz urządzenie --</option>
+                    @foreach (var device in ViewBag.Devices)
+                    {
+                        <option value="@device.Id">@device.Brand - @device.Model</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group pt-3">
+                <label asp-for="ServiceId" class="control-label"></label>
+                <select asp-for="ServiceId" class="form-control">
+                    <option value="">-- Wybierz usługę --</option>
+                    @foreach (var service in ViewBag.Services)
+                    {
+                        <option value="@service.Id">@service.Name - @service.Type</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+
+    </div>
+</section>

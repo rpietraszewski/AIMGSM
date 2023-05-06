@@ -1,0 +1,45 @@
+﻿@using AIMGSM.ViewModels;
+@using AIMGSM.Data;
+@model DeviceVM
+<header class="page-section bg-black">
+    <div class="container text-center">
+        <h2 class="masthead-subheading text-uppercase text-light">Dodanie Urządzenia</h2>
+    </div>
+</header>
+<section class="page-section bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading">Urządzenie :</h2>
+        </div>
+<form asp-action="DeviceAdd" method="post">
+    <div class="form-group">
+        <label asp-for="Brand" class="control-label"></label>
+        <select asp-for="Brand" class="form-control">
+            <option value="">-- Select a brand --</option>
+            @foreach (var brand in Enum.GetValues(typeof(BrandEnum)))
+            {
+                <option value="@brand">@brand</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Model" class="control-label"></label>
+        <input asp-for="Model" class="form-control" />
+    </div>
+    <div class="form-group pt-3">
+        <label asp-for="Type" class="control-label"></label>
+        <select asp-for="Type" class="form-control">
+            <option value="">-- Select a type --</option>
+            @foreach (var type in Enum.GetValues(typeof(TypeEnum)))
+            {
+                <option value="@type">@type</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+
+    </div>
+</section>

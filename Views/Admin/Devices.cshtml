@@ -1,0 +1,39 @@
+﻿@using AIMGSM.ViewModels;
+@using AIMGSM.Data;
+@model IEnumerable<DeviceVM>
+<header class="page-section bg-black">
+    <div class="container text-center">
+        <h2 class="masthead-subheading text-uppercase text-light">Wszystkie Urządzenia</h2>
+    </div>
+</header>
+<section class="page-section bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading">Urządzenia :</h2>
+        </div>
+        <table class="table">
+            <tr class="table-primary">
+                <th>ID</th>
+                <th>Producent</td>
+                <th>Model</th>
+                <th>Typ urządzenia</th>
+                <th></th>
+            </tr>
+            @foreach(var item in Model)
+            {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Brand</td>
+                <td>@item.Model</td>
+                <td>@item.Type</td>
+                <td>
+                    <form asp-action="DeviceDelete" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-warning">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</section>

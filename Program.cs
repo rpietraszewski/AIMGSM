@@ -1,15 +1,37 @@
 using AIMGSM.Contexts;
+using AIMGSM.Services;
+using AIMGSM.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using AIMGSM.Repositories;
+using AIMGSM.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddDbContext<ServiceContext>(options =>
+builder.Services.AddDbContext<GlobalContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddTransient<IContactService, ContactService>();
+
+builder.Services.AddTransient<IServiceService, ServiceService>();
+builder.Services.AddTransient<IServiceRepository, ServiceRepository>();
+
+builder.Services.AddTransient<IDeviceService, DeviceService>();
+builder.Services.AddTransient<IDeviceRepository, DeviceRepository>();
+
+builder.Services.AddTransient<IPriceService, PriceService>();
+builder.Services.AddTransient<IPriceRepository, PriceRepository>();
 
 // Add services to the container.
+builder.Configuration.SetBasePath(Directory.GetCurrentDirectory());
+builder.Configuration.AddJsonFile("appsettings.json");
+
+builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
