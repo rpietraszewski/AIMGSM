@@ -8,6 +8,7 @@ namespace AIMGSM.ViewModels
         public int OriginalPrice { get; set; }
         public int SecondPrice { get; set; }
         public string? Name { get; set; }
+        public TypeEnum? Type { get; set; }
         public BrandEnum? Brand { get; set; }
         public string? Model { get; set; }
     }

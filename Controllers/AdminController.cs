@@ -119,12 +119,12 @@ namespace AIMGSM.Controllers
             return View("Prices");
         }
         [HttpPost]
-        public IActionResult PriceAdd(PriceVM priceVM, int deviceId, int serviceId)
+        public IActionResult PriceAdd(PriceAddVM priceAddVM)
         {
             
             if (ModelState.IsValid)
             {
-                _priceService.AddPrice(priceVM,deviceId,serviceId);
+                _priceService.AddPrice(priceAddVM);
             }
             return RedirectToAction("Prices");
         }

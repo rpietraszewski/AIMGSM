@@ -17,17 +17,15 @@ namespace AIMGSM.Services
             _deviceService = deviceService;
             _serviceService = serviceService;
         }
-        public void AddPrice(PriceVM priceVM,int deviceId, int serviceId)
+        public void AddPrice(PriceAddVM priceAddVM)
         {
-            DeviceVM device = _deviceService.GetDeviceById(deviceId);
-            ServiceVM service = _serviceService.GetServiceById(serviceId);
             Price obj = new Price()
             {
-                Id = priceVM.Id,
-                OriginalPrice = priceVM.OriginalPrice,
-                SecondPrice = priceVM.SecondPrice,
-                DeviceId= device.Id,
-                ServiceId= service.Id,
+                Id = priceAddVM.Id,
+                OriginalPrice = priceAddVM.OriginalPrice,
+                SecondPrice = priceAddVM.SecondPrice,
+                DeviceId= priceAddVM.Id,
+                ServiceId= priceAddVM.Id,
             };
             _priceRepository.AddPrice(obj);
         }
@@ -42,14 +40,15 @@ namespace AIMGSM.Services
             List<PriceVM> result = new List<PriceVM>();
             list.ForEach(element =>
             {
-                DeviceVM device = _deviceService.GetDeviceById(element.Id);
-                ServiceVM service = _serviceService.GetServiceById(element.Id);
+                DeviceVM device = _deviceService.GetDeviceById(element.DeviceId);
+                ServiceVM service = _serviceService.GetServiceById(element.ServiceId);
                 PriceVM resultVM = new PriceVM()
                 {
                     Id = element.Id,
                     OriginalPrice = element.OriginalPrice,
                     SecondPrice = element.SecondPrice,
                     Name = service.Name,
+                    Type = service.Type,
                     Brand = device.Brand,
                     Model = device.Model,
                 };
