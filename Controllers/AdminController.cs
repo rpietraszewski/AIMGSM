@@ -121,7 +121,6 @@ namespace AIMGSM.Controllers
         [HttpPost]
         public IActionResult PriceAdd(PriceAddVM priceAddVM)
         {
-            
             if (ModelState.IsValid)
             {
                 _priceService.AddPrice(priceAddVM);

@@ -24,8 +24,8 @@ namespace AIMGSM.Services
                 Id = priceAddVM.Id,
                 OriginalPrice = priceAddVM.OriginalPrice,
                 SecondPrice = priceAddVM.SecondPrice,
-                DeviceId= priceAddVM.Id,
-                ServiceId= priceAddVM.Id,
+                DeviceId= priceAddVM.DeviceId,
+                ServiceId= priceAddVM.ServiceId,
             };
             _priceRepository.AddPrice(obj);
         }
