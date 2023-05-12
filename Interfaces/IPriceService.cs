@@ -11,5 +11,6 @@ namespace AIMGSM.Interfaces
         public PriceVM GetPriceById(int id);
         public void RemovePrice(int id);
         public List<PriceVM> GetAllPricesByBrand(BrandEnum Brand);
+        public List<PriceVM> GetAllPricesByType(TypeEnum Type);
     }
 }

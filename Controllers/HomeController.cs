@@ -5,22 +5,39 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using AIMGSM.ViewModels;
 using System.ComponentModel.DataAnnotations;
+using AIMGSM.Data;
 
 namespace AIMGSM.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
         private readonly IContactService _contactService;
-        public HomeController(ILogger<HomeController> logger, IContactService contactService)
+        private readonly IPriceService _priceService;
+        public HomeController(ILogger<HomeController> logger, IContactService contactService, IPriceService priceService)
         {
             _logger = logger;
             _contactService = contactService;
+            _priceService = priceService;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult PricesByBrand([FromQuery] BrandEnum Brand)
+        {
+            List<PriceVM> list = _priceService.GetAllPricesByBrand(Brand);
+            return View(list);
+        }
+        [HttpGet]
+        public IActionResult PricesByType([FromQuery] TypeEnum Type)
+        {
+            List<PriceVM> list = _priceService.GetAllPricesByType(Type);
+            return View(list);
         }
 
         public IActionResult Privacy()

@@ -6,6 +6,7 @@ using AIMGSM.Models;
 using AIMGSM.Repositories;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AIMGSM.Data;
 
 namespace AIMGSM.Controllers
 {
@@ -105,6 +106,13 @@ namespace AIMGSM.Controllers
             List<PriceVM> list = _priceService.GetAllPrices();
             return View(list);
         }
+        [HttpGet]
+        public IActionResult PricesByBrand(BrandEnum Brand)
+        {
+            List<PriceVM> list = _priceService.GetAllPricesByBrand(Brand);
+            return View(list);
+        }
+
         [HttpGet]
         public IActionResult PriceAdd()
         {
