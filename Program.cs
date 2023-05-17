@@ -27,6 +27,12 @@ builder.Services.AddTransient<IDeviceRepository, DeviceRepository>();
 builder.Services.AddTransient<IPriceService, PriceService>();
 builder.Services.AddTransient<IPriceRepository, PriceRepository>();
 
+builder.Services.AddTransient<IBlogService, BlogService>();
+builder.Services.AddTransient<IBlogRepository, IBlogRepository>();
+
+builder.Services.AddTransient<IFormService, FormService>();
+builder.Services.AddTransient<IFormRepository, FormRepository>();
+
 // Add services to the container.
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory());
 builder.Configuration.AddJsonFile("appsettings.json");
