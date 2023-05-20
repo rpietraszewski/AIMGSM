@@ -1,11 +1,42 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using AIMGSM.ViewModels;
+@model FormVM
 <header class="masthead" >
     <div class="container">
-        <div class="masthead-heading">Witamy</div>
-        <div class="masthead-subheading text-uppercase">Firma oferuje niezawodne usługi naprawy dla różnego rodzaju urządzeń elektronicznych, w tym telefonów, laptopów, hulajnóg elektrycznych i odkurzaczy robotów. Oferują również usługi usuwania konta Xiaomi oraz rozwiązania bypass FRP. Zespół wysoko wykwalifikowanych techników zapewnia wysokiej jakości usługi naprawy, korzystając z najlepszych jakościowo części zamiennych, a także stawiając na satysfakcję klientów poprzez szybkie czasy realizacji usług i doskonałą obsługę klienta.</div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#services">Dowiedz się więcej</a>
+        <div class="row">
+            <div class="col-md-6" style="position: relative">
+                <div class="masthead-heading text-start">Skontaktuj się z nami</div>
+                <div class="masthead-subheading text-start">Niezawodny serwis telefonów, hulajnóg oraz laptopów. <br />Zapraszamy </div>
+                <a class="btn btn-danger btn-sm text-uppercase" href="~/Home/Contact">Kontakt</a>
+            </div>
+            <div class="col-md-6">
+                <form asp-action="Index" method="post" class="form-back" enctype="multipart/form-data">
+                        <div class="wrap1">
+                            <label class="text-black fw-bold text-uppercase">Formularz zgłoszeniowy</label>
+                            <div class="form-group pt-3">
+                                <input asp-for="Name" class="form-control" placeholder="Imię i Nazwisko"/>
+                            </div>
+                            <div class="form-group pt-3">
+                                <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Numer Telefonu" />
+                            </div>
+                            <div class="form-group pt-3">
+                                <input asp-for="Email" type="email" class="form-control" placeholder="E-mail" />
+                            </div>
+                            <div class="form-group pt-3">
+                                <input asp-for="Topic" class="form-control" placeholder="Temat" />
+                            </div>
+                            <div class="form-group pt-3">
+                                <textarea asp-for="Description" type="text" class="form-control" placeholder="Opisz problem..." rows="3"></textarea>
+                            </div>
+                            <div class="form-group pt-3 py-3">
+                                <input asp-for="ImageUrl" name="ImageUrl" type="file" class="form-control"/>
+                            </div>
+                            <div class="form-group pt-3">
+                                <button type="submit" class="btn btn-danger ">Wyślij</button>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
     </div>
 </header>
 <!-- Services-->
@@ -43,92 +74,7 @@
         </div>
     </div>
 </section>
-<!-- Portfolio Grid-->
-<section class="page-section bg-light" id="portfolio">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="section-heading text-uppercase">Nasze Usługi</h2>
-            <h3 class="section-subheading text-muted">Sprawdź co oferuje nasz serwis</h3>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 1-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Naprawa Telefonów</div>
-                        <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 2-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Naprawa Laptopów</div>
-                        <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 3-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Naprawa odkurzaczy Xiaomi</div>
-                        <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 mb-4 mb-lg-0">
-                <!-- Portfolio item 4-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/4.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Naprawa hulajnóg Xiaomi</div>
-                        <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6 mb-4 mb-sm-0">
-                <!-- Portfolio item 5-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid" src="assets/img/portfolio/5.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Konta Xiaomi, Bypass FRP</div>
-                        <div class="portfolio-caption-subheading text-muted">Lorem Ipsum</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- Portfolio Modals-->
 <!-- Portfolio item 1 modal popup-->
 <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
