@@ -28,7 +28,7 @@ builder.Services.AddTransient<IPriceService, PriceService>();
 builder.Services.AddTransient<IPriceRepository, PriceRepository>();
 
 builder.Services.AddTransient<IBlogService, BlogService>();
-builder.Services.AddTransient<IBlogRepository, IBlogRepository>();
+builder.Services.AddTransient<IBlogRepository, BlogRepository>();
 
 builder.Services.AddTransient<IFormService, FormService>();
 builder.Services.AddTransient<IFormRepository, FormRepository>();

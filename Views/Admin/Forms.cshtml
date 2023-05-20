@@ -1,0 +1,44 @@
+﻿@using AIMGSM.ViewModels;
+@using AIMGSM.Data;
+@model IEnumerable<FormVM>
+<header class="page-section bg-black">
+    <div class="container text-center">
+        <h2 class="masthead-subheading text-uppercase text-light">Wszystkie Serwisy</h2>
+        <a class="btn btn-primary btn-sm text-uppercase" href="/Admin/PriceAdd">Dodaj usługe z ceną</a>
+    </div>
+</header>
+<section class="page-section bg-light">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading">Serwisy :</h2>
+        </div>
+        <table class="table">
+            <tr class="table-primary">
+                <th>Imie i nazwisko</th>
+                <th>Email</td>
+                <th>Temat</th>
+                <th>Numer tel:</th>
+                <th>Opis</th>
+                <th>Zdjęcie poglądowe:</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.Topic</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Description</td>
+                        <td>@item.ImageUrl</td>
+                        <td>
+                            <form asp-action="FormDelete" method="post">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-warning">Usuń</button>
+                            </form>
+                        </td>
+                    </tr>
+            }
+        </table>
+    </div>
+</section>

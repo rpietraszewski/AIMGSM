@@ -7,6 +7,7 @@ using AIMGSM.Repositories;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AIMGSM.Data;
+using System.Diagnostics.Contracts;
 
 namespace AIMGSM.Controllers
 {
@@ -17,13 +18,15 @@ namespace AIMGSM.Controllers
         private readonly IServiceService _serviceService;
         private readonly IDeviceService _deviceService;
         private readonly IPriceService _priceService;
-        public AdminController(ILogger<AdminController> logger, IContactService contactService, IServiceService serviceService, IDeviceService deviceService, IPriceService priceService)
+        private readonly IFormService _formService;
+        public AdminController(ILogger<AdminController> logger, IContactService contactService, IServiceService serviceService, IDeviceService deviceService, IPriceService priceService, IFormService formService)
         {
             _logger = logger;
             _contactService = contactService;
             _serviceService = serviceService;
             _deviceService = deviceService;
             _priceService = priceService;
+            _formService = formService;
         }
         [HttpGet]
         public IActionResult Services()
@@ -143,6 +146,21 @@ namespace AIMGSM.Controllers
                 _priceService.RemovePrice(id);
             }
             return RedirectToAction("Prices");
+        }
+        [HttpGet]
+        public IActionResult Forms()
+        {
+            List<FormVM> list = _formService.GetAllForms();
+            return View(list);
+        }
+        [HttpPost]
+        public IActionResult FormDelete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                _formService.RemoveForm(id);
+            }
+            return RedirectToAction("Forms");
         }
     }
 }
