@@ -41,22 +41,25 @@ namespace AIMGSM.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Index(FormVM formVM/*, IFormFile file*/)
+        public async Task<IActionResult> Index(FormVM formVM)
         {
-            /*
-            // Generate a unique file name
-            string fileName = $"{Guid.NewGuid()}{Path.GetExtension(formVM.ImageUrl)}";
-
-            // Set the path where the image will be saved
-            string imagePath = Path.Combine(_hostingEnvironment.WebRootPath, "~/wwwroot/assets/img/photos", fileName);
-
-            // Save the image to the specified path
-            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            if (formVM.ImageFile != null && formVM.ImageFile.Length > 0)
             {
-                formVM.ImageUrl = fileName;
-                formVM.ImageUrl.CopyTo(fileStream);
-            }*/
+                string uniqueFileName = GetUniqueFileName(formVM.ImageFile.FileName);
 
+                // Set the file path
+                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "assets/img/forms");
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                // Save the image file to the server
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await formVM.ImageFile.CopyToAsync(fileStream);
+                }
+
+                // Set the image URL in the ViewModel
+                formVM.ImageUrl = $"{uniqueFileName}";
+            }
             _formService.AddForm(formVM);
             return View();
         }

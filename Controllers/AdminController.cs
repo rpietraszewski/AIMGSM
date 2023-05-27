@@ -8,6 +8,7 @@ using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AIMGSM.Data;
 using System.Diagnostics.Contracts;
+using Microsoft.SqlServer.Server;
 
 namespace AIMGSM.Controllers
 {
@@ -19,7 +20,9 @@ namespace AIMGSM.Controllers
         private readonly IDeviceService _deviceService;
         private readonly IPriceService _priceService;
         private readonly IFormService _formService;
-        public AdminController(ILogger<AdminController> logger, IContactService contactService, IServiceService serviceService, IDeviceService deviceService, IPriceService priceService, IFormService formService)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public AdminController(ILogger<AdminController> logger, IContactService contactService, IServiceService serviceService, IDeviceService deviceService, IPriceService priceService, IFormService formService, IWebHostEnvironment hostingEnvironment)
         {
             _logger = logger;
             _contactService = contactService;
@@ -27,7 +30,15 @@ namespace AIMGSM.Controllers
             _deviceService = deviceService;
             _priceService = priceService;
             _formService = formService;
+            _hostingEnvironment = hostingEnvironment;
         }
+
+        private string GetUniqueFileName(string fileName)
+        {
+            string uniqueFileName = $"{Guid.NewGuid().ToString()}_{fileName}";
+            return uniqueFileName;
+        }
+
         [HttpGet]
         public IActionResult Services()
         {
@@ -79,20 +90,39 @@ namespace AIMGSM.Controllers
             return View("Devices");
         }
         [HttpPost]
-        public IActionResult DeviceAdd(DeviceVM deviceVM)
+        public async Task<IActionResult> DeviceAdd(DeviceVM deviceVM)
         {
-            if (ModelState.IsValid)
-            {
+                if (deviceVM.ImageFile != null && deviceVM.ImageFile.Length > 0)
+                {
+                    string uniqueFileName = GetUniqueFileName(deviceVM.ImageFile.FileName);
+
+                    // Set the file path
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "assets/img/devices");
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    // Save the image file to the server
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await deviceVM.ImageFile.CopyToAsync(fileStream);
+                    }
+
+                    // Set the image URL in the ViewModel
+                    deviceVM.ImageUrl = $"{uniqueFileName}";
+                }
                 _deviceService.AddDevice(deviceVM);
                 return RedirectToAction("Devices");
-            }
-            return View(deviceVM);
         }
         [HttpPost]
         public IActionResult DeviceDelete(int id)
         {
+            var device = _deviceService.GetDeviceById(id);
             if (id != null)
             {
+                string filePath = Path.Combine(_hostingEnvironment.WebRootPath, "assets/img/devices", device.ImageUrl);
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
                 _deviceService.RemoveDevice(id);
                 return RedirectToAction("Devices");
             }
@@ -156,8 +186,14 @@ namespace AIMGSM.Controllers
         [HttpPost]
         public IActionResult FormDelete(int id)
         {
+            var form = _formService.GetFormById(id);
             if (ModelState.IsValid)
             {
+                string filePath = Path.Combine(_hostingEnvironment.WebRootPath, "assets/img/forms", form.ImageUrl);
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
                 _formService.RemoveForm(id);
             }
             return RedirectToAction("Forms");

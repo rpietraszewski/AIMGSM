@@ -28,6 +28,11 @@ namespace AIMGSM.Repositories
             return _context.Form.OrderBy(x => x.Id).ToList();
         }
 
+        public Form GetFormById(int id)
+        {
+            return _context.Form.FirstOrDefault(x => x.Id == id);
+        }
+
         public void RemoveForm(int id)
         {
             Form form = _context.Form.FirstOrDefault(y => y.Id == id);
