@@ -6,6 +6,7 @@ namespace AIMGSM.Interfaces
     {
         public void AddForm(Form form);
         public List<Form> GetAllForms();
+        public Form GetFormById(int id);
         public void RemoveForm(int id);
     }
 }

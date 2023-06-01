@@ -8,5 +8,7 @@ namespace AIMGSM.Models
         public BrandEnum? Brand { get; set; }
         public string? Model { get; set; }
         public TypeEnum? Type { get; set; }
+        public string? ImageUrl { get; set; }
+
     }
 }

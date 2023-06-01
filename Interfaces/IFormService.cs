@@ -8,5 +8,6 @@ namespace AIMGSM.Interfaces
         public void AddForm(FormVM formVM);
         public List<FormVM> GetAllForms();
         public void RemoveForm(int id);
+        public FormVM GetFormById(int id);
     }
 }

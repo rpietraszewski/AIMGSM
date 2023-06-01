@@ -53,6 +53,21 @@ namespace AIMGSM.Services
             return result;
         }
 
+        public FormVM GetFormById(int id)
+        {
+            Form form = _formRepository.GetFormById(id);
+            return new FormVM()
+            {
+                Id = form.Id,
+                Name = form.Name,
+                Email = form.Email,
+                Topic = form.Topic,
+                Description = form.Description,
+                PhoneNumber = form.PhoneNumber,
+                ImageUrl = form.ImageUrl,
+            };
+        }
+
         public void RemoveForm(int id)
         {
             _formRepository.RemoveForm(id);

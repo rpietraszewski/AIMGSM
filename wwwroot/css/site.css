@@ -10893,8 +10893,8 @@ p {
 }
 
 #mainNav {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     /*background-color: #212529;*/
     background-color: white;
     position: relative;
@@ -10928,8 +10928,8 @@ p {
 }
 
     #mainNav.navbar-shrink {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
         /*background-color: #212529;*/
         background-color: white;
         position: fixed;
@@ -10956,7 +10956,7 @@ p {
   }
   #mainNav.navbar-shrink .navbar-brand svg,
   #mainNav.navbar-shrink .navbar-brand img {
-    height: 3rem;
+    height: 4rem;
   }
   #mainNav .navbar-nav .nav-item {
     margin-right: 1rem;
@@ -11426,7 +11426,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    background-color: rgba(255,255,255,.5);
+    background-color: transparent;
     background-clip: padding-box;
     -webkit-appearance: none;
     -moz-appearance: none;

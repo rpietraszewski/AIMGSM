@@ -11,6 +11,7 @@ namespace AIMGSM.ViewModels
         public string? Topic { get; set; }
         public string? Description { get; set; }
         public string? PhoneNumber { get; set; }
+        public IFormFile ImageFile { get; set; }
         public string? ImageUrl { get; set; }
     }
 }

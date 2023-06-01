@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/AIMGSM.styles.css" asp-append-version="true" />
 </head>
 <body id="page-top">
-    <div class="myheader navbar px-5 py-2">
+    <!--<div class="myheader navbar px-5 py-2">
                 <ul class="navbar-nav ms-auto flex-row mx-5">
             <li class="nav-item align-text-center me-5"><a class="nav-link mylink text-decoration-none" href="~/Home/Contact">Tel: +536 886 386</a></li>
                     <li class="nav-item"><a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
@@ -19,19 +19,19 @@
                     <li class="nav-item"><a class="btn-social mx-2 mylink" href="#!" aria-label="LinkedIn"><img src="~/assets/img/allegro-custom.svg"></img></a></li>
                     <li class="nav-item ms-auto pe-5"><a class="nav-link mylink text-decoration-none" href="~/Home/Contact">Pon-Pt: 11:00-19:00, Sobota: 11:00-16:00</a></li>
                 </ul>
-    </div>
+    </div>-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <!-- <div class="collapse navbar-collapse flex-inherit" id="navbarResponsive">
+                <div class="collapse navbar-collapse flex-inherit" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link">+666 666 666</a></li>
                     </ul>
-                </div> -->
+                </div>
                 <a class="navbar-brand" href="~/home/index">
                     <img src="~/assets/img/AIMGSM-logo3.jpg"/>
                 </a>
-                <a class="navbar-brand" href="/Home/Index">AIMGSM</a>
+                <!--<a class="navbar-brand" href="/Home/Index">AIMGSM</a>-->
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars">
@@ -45,12 +45,6 @@
                 </div>-->
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <!--<li class="nav-item align-text-center">
-                            <a class="nav-link" href="#">
-                            Godziny otwatcia</br>
-                            7:00-16:00
-                            </a>
-                        </li>-->
                         <li class="nav-item mydropdown">
                             <a class="nav-link" href="/Home/ServicesPhoneBrand">Serwis</a>
                             <div class="mydropdown-content">
@@ -61,7 +55,6 @@
                             <a class="nav-link" href="~/Home/PricesByType?type=Account">Konta&nbsp;Xiaomi, Bypass FRP</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="~/Home/Blog">Nowości</a></li>
                         <li class="nav-item"><a class="nav-link" href="~/Home/Buyup">Skup</a></li>
                         <li class="nav-item"><a class="nav-link" href="~/Home/Contact">Kontakt</a></li>
                     </ul>
@@ -76,8 +69,21 @@
     </div>
     <button onclick="topFunction()" class="top-btn" id="topBtn"><i class="fa-solid fa-angle-up" style="color: #ffffff;"></i></button>
     <section class="page-section bg-black">
-        <div class="mt-minus p-3">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2446.95463898864!2d21.025148115794526!3d52.171518179749725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471932c0e49a8331%3A0x9277af9040dd95c0!2sSonaty%205%2Fu11%2C%2002-744%20Warszawa!5e0!3m2!1spl!2spl!4v1683223511522!5m2!1spl!2spl" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2446.95463898864!2d21.025148115794526!3d52.171518179749725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471932c0e49a8331%3A0x9277af9040dd95c0!2sSonaty%205%2Fu11%2C%2002-744%20Warszawa!5e0!3m2!1spl!2spl!4v1683223511522!5m2!1spl!2spl" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="col-sm-6">
+                        <ul class="list-group-horizontal-sm list-unstyled ms-auto flex-row mx-5">
+                            <li class="list-group-item"><a class="link-light text-decoration-none" href="~/Home/Contact"><p>Telefon kontaktowy: +536 886 386</p></a></li>
+                            <li class="list-group-item"><a class="link-light text-decoration-none" href="~/Home/Contact"><p>Pon-Pt: 11:00-19:00, Sobota: 11:00-16:00</p></a></li>
+                            <li class="list-group-item"><a class="link-light text-decoration-none" href="~/Home/Contact"><p>Email: Aimgsmsupp@gmail.com</p></a></li>
+                            <li class="list-group-item"><p class="link-light text-decoration-none">Adres: ul. Sonaty 5/u11</p></li>
+                            <li class="list-group-item"><p class="link-light text-decoration-none">Wejście od ul. coś tam coś tam</p></li>
+                        </ul>
+                </div>
+            </div>
         </div>
     </section>
     <footer class="footer py-4">
@@ -88,10 +94,12 @@
                     <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/aim_gsm/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-social mx-2" href="#!" aria-label="LinkedIn"><img src="~/assets/img/allegro-custom.svg"/></a>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <a class="link-light text-decoration-none me-3" href="#!">Privacy Policy</a>
-                    <a class="link-light text-decoration-none" href="#!">Terms of Use</a>
+                    <a class="link-light text-decoration-none me-3" href="#!">Polityka Prywatności</a>
+                    <a class="link-light text-decoration-none" href="#!">Warunki korzystania</a>
                 </div>
             </div>
         </div>

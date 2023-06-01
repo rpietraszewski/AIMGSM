@@ -7,14 +7,13 @@
         <a class="btn btn-primary btn-sm text-uppercase" href="/Admin/PriceAdd">Dodaj usługe z ceną</a>
     </div>
 </header>
-<section class="page-section bg-light">
+<section class="page-section">
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading">Serwisy :</h2>
         </div>
         <table class="table">
             <tr class="table-primary">
-                <th>ID</th>
                 <th>Producent</td>
                 <th>Model</th>
                 <th>Nazwa usługi</th>
@@ -24,7 +23,6 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Id</td>
                     <td>@item.Brand</td>
                     <td>@item.Model</td>
                     <td>@item.Name</td>
