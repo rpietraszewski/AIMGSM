@@ -1,4 +1,5 @@
-﻿using AIMGSM.Interfaces;
+﻿using AIMGSM.Data;
+using AIMGSM.Interfaces;
 using AIMGSM.Models;
 using AIMGSM.ViewModels;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -29,6 +30,29 @@ namespace AIMGSM.Services
         public void EditDevice(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<DeviceVM> GetAllDevicesByBrand(BrandEnum Brand)
+        {
+            List<Device> list = (List<Device>)_deviceRepository.GetAllDevices().Where(x => x.Brand == Brand).ToList();
+            if (list.Count == 0)
+            {
+                return new List<DeviceVM>();
+            }
+            List<DeviceVM> result = new List<DeviceVM>();
+            list.ForEach(element =>
+            {
+                DeviceVM resultVM = new DeviceVM()
+                {
+                    Id= element.Id,
+                    Brand = element.Brand,
+                    Model = element.Model,
+                    Type= element.Type,
+                    ImageUrl = element.ImageUrl,
+                };
+                result.Add(resultVM);
+            });
+            return result;
         }
 
         public List<DeviceVM> GetAllDevices()

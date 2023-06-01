@@ -96,6 +96,40 @@ namespace AIMGSM.Services
             return result;
         }
 
+        public List<PriceVM> GetAllPricesByBrandModel(BrandEnum Brand, string Model)
+        {
+            List<Price> list = _priceRepository.GetAllPrices()
+                .Join(_deviceRepository.GetAllDevices(),
+                      price => price.DeviceId,
+                      device => device.Id,
+                      (price, device) => new { Price = price, Device = device })
+                .Where(x => x.Device.Brand == Brand && x.Device.Model == Model)
+                .Select(x => x.Price)
+                .ToList();
+            if (list.Count == 0)
+            {
+                return new List<PriceVM>();
+            }
+            List<PriceVM> result = new List<PriceVM>();
+            list.ForEach(element =>
+            {
+                DeviceVM device = _deviceService.GetDeviceById(element.DeviceId);
+                ServiceVM service = _serviceService.GetServiceById(element.ServiceId);
+                PriceVM resultVM = new PriceVM()
+                {
+                    Id = element.Id,
+                    OriginalPrice = element.OriginalPrice,
+                    SecondPrice = element.SecondPrice,
+                    Name = service.Name,
+                    Type = service.Type,
+                    Brand = device.Brand,
+                    Model = device.Model,
+                };
+                result.Add(resultVM);
+            });
+            return result;
+        }
+
         public List<PriceVM> GetAllPricesByType(TypeEnum Type)
         {
             List<Price> list = _priceRepository.GetAllPrices()
@@ -137,7 +171,7 @@ namespace AIMGSM.Services
 
         public void RemovePrice(int id)
         {
-            //_priceService.RemovePrice(id);
+            _priceRepository.RemovePrice(id);
         }
     }
 }

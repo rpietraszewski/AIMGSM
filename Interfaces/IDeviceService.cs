@@ -1,4 +1,5 @@
-﻿using AIMGSM.ViewModels;
+﻿using AIMGSM.Data;
+using AIMGSM.ViewModels;
 
 namespace AIMGSM.Interfaces
 {
@@ -9,6 +10,7 @@ namespace AIMGSM.Interfaces
         public void AddDevice(DeviceVM deviceVM);
         public void RemoveDevice(int id);
         public void EditDevice(int id);
+        public List<DeviceVM> GetAllDevicesByBrand(BrandEnum Brand);
 
     }
 }

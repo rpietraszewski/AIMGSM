@@ -9,6 +9,7 @@ using AIMGSM.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HostFiltering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AIMGSM.Controllers
 {
@@ -19,14 +20,16 @@ namespace AIMGSM.Controllers
         private readonly IContactService _contactService;
         private readonly IPriceService _priceService;
         private readonly IFormService _formService;
+        private readonly IDeviceService _deviceService;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public HomeController(ILogger<HomeController> logger, IContactService contactService, IPriceService priceService, IFormService formService, IWebHostEnvironment hostingEnvironment)
+        public HomeController(ILogger<HomeController> logger, IContactService contactService, IPriceService priceService, IFormService formService, IWebHostEnvironment hostingEnvironment, IDeviceService deviceService)
         {
             _logger = logger;
             _contactService = contactService;
             _priceService = priceService;
             _formService = formService;
             _hostingEnvironment = hostingEnvironment;
+            _deviceService = deviceService;
         }
 
         private string GetUniqueFileName(string fileName)
@@ -47,17 +50,14 @@ namespace AIMGSM.Controllers
             {
                 string uniqueFileName = GetUniqueFileName(formVM.ImageFile.FileName);
 
-                // Set the file path
                 string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "assets/img/forms");
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                // Save the image file to the server
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await formVM.ImageFile.CopyToAsync(fileStream);
                 }
 
-                // Set the image URL in the ViewModel
                 formVM.ImageUrl = $"{uniqueFileName}";
             }
             _formService.AddForm(formVM);
@@ -74,6 +74,23 @@ namespace AIMGSM.Controllers
         public IActionResult PricesByType([FromQuery] TypeEnum Type)
         {
             List<PriceVM> list = _priceService.GetAllPricesByType(Type);
+            return View(list);
+        }
+
+        [HttpGet]
+        public IActionResult PricesByBrandModel([FromQuery] BrandEnum Brand, string Model)
+        {
+            List<PriceVM> list = _priceService.GetAllPricesByBrandModel(Brand, Model);
+            ViewBag.Brand = Brand;
+            ViewBag.Model = Model;
+            return View(list);
+        }
+
+        [HttpGet]
+        public IActionResult DevicesByBrand([FromQuery] BrandEnum Brand)
+        {
+            List<DeviceVM> list = _deviceService.GetAllDevicesByBrand(Brand);
+            ViewBag.Brand = Brand;
             return View(list);
         }
 

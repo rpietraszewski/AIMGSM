@@ -1,0 +1,30 @@
+﻿@using AIMGSM.ViewModels;
+@using AIMGSM.Data;
+@model IEnumerable<DeviceVM>
+<section class="page-section" id="portfolio">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Serwisy @ViewBag.Brand</h2>
+            <h3 class="section-subheading text-muted">Wybierz interesujący ciebie model</h3>
+        </div>
+        <div class="row">
+            @foreach(var item in Model)
+            {
+                <div class="col-lg-3 col-sm-4 mb-4 p-4">
+                <a class="portfolio-link text-decoration-none text-black-50" href="~/Home/PricesByBrandModel?Brand=@item.Brand&amp;Model=@item.Model">
+                    <div class="portfolio-item">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content"><i></i></div>
+                        </div>
+                        <img class="img-fluid" src="~/assets/img/devices/@item.ImageUrl" alt="..." />
+
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">@item.Brand @item.Model</div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            }
+        </div>
+        </div>
+</section>
